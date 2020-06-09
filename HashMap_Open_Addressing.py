@@ -3,7 +3,7 @@ class HashMap:
         self.arraySize = arraySize
         self.array = [None for element in range(arraySize)]
 
-    def hash(self, key, collisionCount):
+    def hash(self, key, collisionCount):        
         return sum(key.encode()) + collisionCount
 
     def compress(self, hashCode):
