@@ -13,9 +13,9 @@ class Graph:
 		node.next = self.graph[src]
 		self.graph[src] = node
 
-		node = AdjNode(src)
-		node.next = self.graph[dest]
-		self.graph[dest] = node
+		#node = AdjNode(src)
+		#node.next = self.graph[dest]
+		#self.graph[dest] = node
 
 	def print_graph(self):
 		for i in range(self.vertices_num):
