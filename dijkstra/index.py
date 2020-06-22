@@ -35,10 +35,36 @@ def dijkstra(g, n, s):
       adjNode = adjNode.next
   return dist
     
-
-
-  
-
-
 result = dijkstra(g, 5, 0)
-print(result)
+#print(result)
+
+def dijkstraWPrev(g, n, s):
+  visited = [False] * n
+  prev = [None] * n
+  dist = [float('inf')] * n
+  dist[s] = 0
+  pq = PriorityQueue()
+  pq.put((0, s))
+
+  while not pq.empty():
+    minValue, index = pq.get()
+    visited[index] = True
+    if dist[index] < minValue:
+      continue
+
+    adjNode = g.graph[index]
+    while adjNode:
+      if visited[adjNode.vertex]:
+        continue
+
+      newDist = dist[index] + adjNode.weight
+      if newDist < dist[adjNode.vertex]:
+        prev[adjNode.vertex] = index
+        dist[adjNode.vertex] = newDist
+        pq.put((newDist, adjNode.vertex))
+      adjNode = adjNode.next
+  return (dist, prev)
+
+dist, prev = dijkstraWPrev(g, 5, 0)
+print(dist)
+print(prev)
