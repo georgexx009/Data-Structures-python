@@ -15,20 +15,22 @@ class MaxHeap:
   def insert(self, new_element):
     self.size += 1
     self.heap.append(new_element)
-    current_el = self.size
-    parent = self.parent_idx(current_el)
-    while parent > 0:
-      self.heapify_up(current_el)
-      current_el = parent
-      parent = self.parent_idx(current_el)
+    self.heapify_up()
 
-  def heapify_up(self, el_idx):  #the el is the current element on the swapping
-    parent_val = self.heap[self.parent_idx(el_idx)]
-    current_val = self.heap[el_idx]
+  def heapify_up(self):
+    current_idx = self.size
+    parent_idx = self.parent_idx(current_idx)
 
-    if parent_val < current_val:
-      self.heap[self.parent_idx(el_idx)] = current_val
-      self.heap[el_idx] = parent_val
+    while parent_idx > 0:
+      parent_val = self.heap[parent_idx]
+      current_val = self.heap[current_idx]
+      if parent_val < current_val:
+        self.heap[parent_idx] = current_val
+        self.heap[current_idx] = parent_val
+        current_idx = parent_idx
+        parent_idx = self.parent_idx(current_idx)
+      else:
+        break
   
   def max_retrieve(self):
     self.heap[1], self.heap[self.size] = self.heap[self.size], self.heap[1]
@@ -94,6 +96,7 @@ class MaxHeap:
 exampleHeap = [None, 6, 4, 5, 3, 2, 0, 1]
 mh = MaxHeap(7, exampleHeap)
 print(mh.heap)
-mh.max_retrieve()
+#mh.max_retrieve()
+mh.insert(7)
 print(mh.heap)
   
