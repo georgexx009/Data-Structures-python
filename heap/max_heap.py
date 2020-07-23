@@ -35,6 +35,7 @@ class MaxHeap:
     self.size -= 1
     max_val = self.heap.pop()
     self.heapify_down(1)
+    #self.heapify_down_v2()
     
   def heapify_down(self, current_idx):
     #check if childs are not out of scope
@@ -58,6 +59,29 @@ class MaxHeap:
     else:
       self.heap[current_idx], self.heap[max_idx] = self.heap[max_idx], self.heap[current_idx]
       self.heapify_down(max_idx)
+
+  def heapify_down_v2(self):
+    current_idx = 1
+    current_val = self.heap[current_idx]
+    max_idx = None
+
+    while True:
+      max_idx = current_idx   
+      left_child_idx = self.left_child_idx(current_idx)
+      right_child_idx = self.right_child_idx(current_idx)
+
+      if left_child_idx <= self.size and current_val < self.heap[left_child_idx]:
+        max_idx = left_child_idx
+      if right_child_idx <= self.size and current_val < self.heap[right_child_idx]:
+        max_idx = right_child_idx
+
+      if max_idx == current_idx:
+        break
+      else:
+        self.heap[current_idx], self.heap[max_idx] = self.heap[max_idx], self.heap[current_idx]
+        current_idx = max_idx
+
+
     
 
     
